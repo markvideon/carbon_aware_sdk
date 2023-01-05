@@ -1,6 +1,6 @@
 name: carbon_aware_sdk
 description: A generated Dart SDK for the Carbon Aware SDK, from the Green Software Foundation.
-version: 1.0.0
+version: 1.0.0+1
 homepage: https://markvideon.dev
 
 environment:
