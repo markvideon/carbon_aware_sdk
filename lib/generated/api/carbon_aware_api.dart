@@ -11,7 +11,8 @@
 part of carbon_aware_sdk;
 
 class CarbonAwareApi {
-  CarbonAwareApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  CarbonAwareApi([ApiClient? apiClient])
+      : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -25,7 +26,10 @@ class CarbonAwareApi {
   ///
   /// * [List<EmissionsForecastBatchParametersDTO>] emissionsForecastBatchParametersDTO:
   ///   Array of requested forecasts.
-  Future<Response> batchForecastDataAsyncWithHttpInfo({ List<EmissionsForecastBatchParametersDTO>? emissionsForecastBatchParametersDTO, }) async {
+  Future<Response> batchForecastDataAsyncWithHttpInfo({
+    List<EmissionsForecastBatchParametersDTO>?
+        emissionsForecastBatchParametersDTO,
+  }) async {
     // ignore: prefer_const_declarations
     final path = r'/emissions/forecasts/batch';
 
@@ -36,8 +40,11 @@ class CarbonAwareApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const contentTypes = <String>['application/json', 'text/json', 'application/*+json'];
-
+    const contentTypes = <String>[
+      'application/json',
+      'text/json',
+      'application/*+json'
+    ];
 
     return apiClient.invokeAPI(
       path,
@@ -58,20 +65,26 @@ class CarbonAwareApi {
   ///
   /// * [List<EmissionsForecastBatchParametersDTO>] emissionsForecastBatchParametersDTO:
   ///   Array of requested forecasts.
-  Future<List<EmissionsForecastDTO>?> batchForecastDataAsync({ List<EmissionsForecastBatchParametersDTO>? emissionsForecastBatchParametersDTO, }) async {
-    final response = await batchForecastDataAsyncWithHttpInfo( emissionsForecastBatchParametersDTO: emissionsForecastBatchParametersDTO, );
+  Future<List<EmissionsForecastDTO>?> batchForecastDataAsync({
+    List<EmissionsForecastBatchParametersDTO>?
+        emissionsForecastBatchParametersDTO,
+  }) async {
+    final response = await batchForecastDataAsyncWithHttpInfo(
+      emissionsForecastBatchParametersDTO: emissionsForecastBatchParametersDTO,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<EmissionsForecastDTO>') as List)
-        .cast<EmissionsForecastDTO>()
-        .toList();
-
+      return (await apiClient.deserializeAsync(
+              responseBody, 'List<EmissionsForecastDTO>') as List)
+          .cast<EmissionsForecastDTO>()
+          .toList();
     }
     return null;
   }
@@ -92,7 +105,11 @@ class CarbonAwareApi {
   ///
   /// * [DateTime] endTime (required):
   ///   The time at which the workflow we are measuring carbon intensity for ended
-  Future<Response> getAverageCarbonIntensityWithHttpInfo(String location, DateTime startTime, DateTime endTime,) async {
+  Future<Response> getAverageCarbonIntensityWithHttpInfo(
+    String location,
+    DateTime startTime,
+    DateTime endTime,
+  ) async {
     // ignore: prefer_const_declarations
     final path = r'/emissions/average-carbon-intensity';
 
@@ -103,12 +120,11 @@ class CarbonAwareApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_queryParams('', 'location', location));
-      queryParams.addAll(_queryParams('', 'startTime', startTime));
-      queryParams.addAll(_queryParams('', 'endTime', endTime));
+    queryParams.addAll(_queryParams('', 'location', location));
+    queryParams.addAll(_queryParams('', 'startTime', startTime));
+    queryParams.addAll(_queryParams('', 'endTime', endTime));
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -135,17 +151,28 @@ class CarbonAwareApi {
   ///
   /// * [DateTime] endTime (required):
   ///   The time at which the workflow we are measuring carbon intensity for ended
-  Future<CarbonIntensityDTO?> getAverageCarbonIntensity(String location, DateTime startTime, DateTime endTime,) async {
-    final response = await getAverageCarbonIntensityWithHttpInfo(location, startTime, endTime,);
+  Future<CarbonIntensityDTO?> getAverageCarbonIntensity(
+    String location,
+    DateTime startTime,
+    DateTime endTime,
+  ) async {
+    final response = await getAverageCarbonIntensityWithHttpInfo(
+      location,
+      startTime,
+      endTime,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'CarbonIntensityDTO',) as CarbonIntensityDTO;
-    
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'CarbonIntensityDTO',
+      ) as CarbonIntensityDTO;
     }
     return null;
   }
@@ -160,7 +187,9 @@ class CarbonAwareApi {
   ///
   /// * [List<CarbonIntensityBatchParametersDTO>] carbonIntensityBatchParametersDTO:
   ///   Array of inputs where each contains a \"location\", \"startDate\", and \"endDate\" for which to calculate average marginal carbon intensity.
-  Future<Response> getAverageCarbonIntensityBatchWithHttpInfo({ List<CarbonIntensityBatchParametersDTO>? carbonIntensityBatchParametersDTO, }) async {
+  Future<Response> getAverageCarbonIntensityBatchWithHttpInfo({
+    List<CarbonIntensityBatchParametersDTO>? carbonIntensityBatchParametersDTO,
+  }) async {
     // ignore: prefer_const_declarations
     final path = r'/emissions/average-carbon-intensity/batch';
 
@@ -171,8 +200,11 @@ class CarbonAwareApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-    const contentTypes = <String>['application/json', 'text/json', 'application/*+json'];
-
+    const contentTypes = <String>[
+      'application/json',
+      'text/json',
+      'application/*+json'
+    ];
 
     return apiClient.invokeAPI(
       path,
@@ -193,20 +225,25 @@ class CarbonAwareApi {
   ///
   /// * [List<CarbonIntensityBatchParametersDTO>] carbonIntensityBatchParametersDTO:
   ///   Array of inputs where each contains a \"location\", \"startDate\", and \"endDate\" for which to calculate average marginal carbon intensity.
-  Future<List<CarbonIntensityDTO>?> getAverageCarbonIntensityBatch({ List<CarbonIntensityBatchParametersDTO>? carbonIntensityBatchParametersDTO, }) async {
-    final response = await getAverageCarbonIntensityBatchWithHttpInfo( carbonIntensityBatchParametersDTO: carbonIntensityBatchParametersDTO, );
+  Future<List<CarbonIntensityDTO>?> getAverageCarbonIntensityBatch({
+    List<CarbonIntensityBatchParametersDTO>? carbonIntensityBatchParametersDTO,
+  }) async {
+    final response = await getAverageCarbonIntensityBatchWithHttpInfo(
+      carbonIntensityBatchParametersDTO: carbonIntensityBatchParametersDTO,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<CarbonIntensityDTO>') as List)
-        .cast<CarbonIntensityDTO>()
-        .toList();
-
+      return (await apiClient.deserializeAsync(
+              responseBody, 'List<CarbonIntensityDTO>') as List)
+          .cast<CarbonIntensityDTO>()
+          .toList();
     }
     return null;
   }
@@ -225,7 +262,11 @@ class CarbonAwareApi {
   ///
   /// * [DateTime] toTime:
   ///   [Optional] End time for the data query.
-  Future<Response> getBestEmissionsDataForLocationsByTimeWithHttpInfo(List<String> location, { DateTime? time, DateTime? toTime, }) async {
+  Future<Response> getBestEmissionsDataForLocationsByTimeWithHttpInfo(
+    List<String> location, {
+    DateTime? time,
+    DateTime? toTime,
+  }) async {
     // ignore: prefer_const_declarations
     final path = r'/emissions/bylocations/best';
 
@@ -236,7 +277,7 @@ class CarbonAwareApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_queryParams('multi', 'location', location));
+    queryParams.addAll(_queryParams('multi', 'location', location));
     if (time != null) {
       queryParams.addAll(_queryParams('', 'time', time));
     }
@@ -245,7 +286,6 @@ class CarbonAwareApi {
     }
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -270,20 +310,29 @@ class CarbonAwareApi {
   ///
   /// * [DateTime] toTime:
   ///   [Optional] End time for the data query.
-  Future<List<EmissionsData>?> getBestEmissionsDataForLocationsByTime(List<String> location, { DateTime? time, DateTime? toTime, }) async {
-    final response = await getBestEmissionsDataForLocationsByTimeWithHttpInfo(location,  time: time, toTime: toTime, );
+  Future<List<EmissionsData>?> getBestEmissionsDataForLocationsByTime(
+    List<String> location, {
+    DateTime? time,
+    DateTime? toTime,
+  }) async {
+    final response = await getBestEmissionsDataForLocationsByTimeWithHttpInfo(
+      location,
+      time: time,
+      toTime: toTime,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<EmissionsData>') as List)
-        .cast<EmissionsData>()
-        .toList();
-
+      return (await apiClient.deserializeAsync(
+              responseBody, 'List<EmissionsData>') as List)
+          .cast<EmissionsData>()
+          .toList();
     }
     return null;
   }
@@ -307,7 +356,12 @@ class CarbonAwareApi {
   ///
   /// * [int] windowSize:
   ///   The estimated duration (in minutes) of the workload.  Defaults to the duration of a single forecast data point.
-  Future<Response> getCurrentForecastDataWithHttpInfo(List<String> location, { DateTime? dataStartAt, DateTime? dataEndAt, int? windowSize, }) async {
+  Future<Response> getCurrentForecastDataWithHttpInfo(
+    List<String> location, {
+    DateTime? dataStartAt,
+    DateTime? dataEndAt,
+    int? windowSize,
+  }) async {
     // ignore: prefer_const_declarations
     final path = r'/emissions/forecasts/current';
 
@@ -318,7 +372,7 @@ class CarbonAwareApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_queryParams('multi', 'location', location));
+    queryParams.addAll(_queryParams('multi', 'location', location));
     if (dataStartAt != null) {
       queryParams.addAll(_queryParams('', 'dataStartAt', dataStartAt));
     }
@@ -331,7 +385,6 @@ class CarbonAwareApi {
 
     const contentTypes = <String>[];
 
-
     return apiClient.invokeAPI(
       path,
       'GET',
@@ -360,20 +413,31 @@ class CarbonAwareApi {
   ///
   /// * [int] windowSize:
   ///   The estimated duration (in minutes) of the workload.  Defaults to the duration of a single forecast data point.
-  Future<List<EmissionsForecastDTO>?> getCurrentForecastData(List<String> location, { DateTime? dataStartAt, DateTime? dataEndAt, int? windowSize, }) async {
-    final response = await getCurrentForecastDataWithHttpInfo(location,  dataStartAt: dataStartAt, dataEndAt: dataEndAt, windowSize: windowSize, );
+  Future<List<EmissionsForecastDTO>?> getCurrentForecastData(
+    List<String> location, {
+    DateTime? dataStartAt,
+    DateTime? dataEndAt,
+    int? windowSize,
+  }) async {
+    final response = await getCurrentForecastDataWithHttpInfo(
+      location,
+      dataStartAt: dataStartAt,
+      dataEndAt: dataEndAt,
+      windowSize: windowSize,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<EmissionsForecastDTO>') as List)
-        .cast<EmissionsForecastDTO>()
-        .toList();
-
+      return (await apiClient.deserializeAsync(
+              responseBody, 'List<EmissionsForecastDTO>') as List)
+          .cast<EmissionsForecastDTO>()
+          .toList();
     }
     return null;
   }
@@ -392,7 +456,11 @@ class CarbonAwareApi {
   ///
   /// * [DateTime] toTime:
   ///   [Optional] End time for the data query.
-  Future<Response> getEmissionsDataForLocationByTimeWithHttpInfo(String location, { DateTime? time, DateTime? toTime, }) async {
+  Future<Response> getEmissionsDataForLocationByTimeWithHttpInfo(
+    String location, {
+    DateTime? time,
+    DateTime? toTime,
+  }) async {
     // ignore: prefer_const_declarations
     final path = r'/emissions/bylocation';
 
@@ -403,7 +471,7 @@ class CarbonAwareApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_queryParams('', 'location', location));
+    queryParams.addAll(_queryParams('', 'location', location));
     if (time != null) {
       queryParams.addAll(_queryParams('', 'time', time));
     }
@@ -412,7 +480,6 @@ class CarbonAwareApi {
     }
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -437,20 +504,29 @@ class CarbonAwareApi {
   ///
   /// * [DateTime] toTime:
   ///   [Optional] End time for the data query.
-  Future<List<EmissionsData>?> getEmissionsDataForLocationByTime(String location, { DateTime? time, DateTime? toTime, }) async {
-    final response = await getEmissionsDataForLocationByTimeWithHttpInfo(location,  time: time, toTime: toTime, );
+  Future<List<EmissionsData>?> getEmissionsDataForLocationByTime(
+    String location, {
+    DateTime? time,
+    DateTime? toTime,
+  }) async {
+    final response = await getEmissionsDataForLocationByTimeWithHttpInfo(
+      location,
+      time: time,
+      toTime: toTime,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<EmissionsData>') as List)
-        .cast<EmissionsData>()
-        .toList();
-
+      return (await apiClient.deserializeAsync(
+              responseBody, 'List<EmissionsData>') as List)
+          .cast<EmissionsData>()
+          .toList();
     }
     return null;
   }
@@ -469,7 +545,11 @@ class CarbonAwareApi {
   ///
   /// * [DateTime] toTime:
   ///   [Optional] End time for the data query.
-  Future<Response> getEmissionsDataForLocationsByTimeWithHttpInfo(List<String> location, { DateTime? time, DateTime? toTime, }) async {
+  Future<Response> getEmissionsDataForLocationsByTimeWithHttpInfo(
+    List<String> location, {
+    DateTime? time,
+    DateTime? toTime,
+  }) async {
     // ignore: prefer_const_declarations
     final path = r'/emissions/bylocations';
 
@@ -480,7 +560,7 @@ class CarbonAwareApi {
     final headerParams = <String, String>{};
     final formParams = <String, String>{};
 
-      queryParams.addAll(_queryParams('multi', 'location', location));
+    queryParams.addAll(_queryParams('multi', 'location', location));
     if (time != null) {
       queryParams.addAll(_queryParams('', 'time', time));
     }
@@ -489,7 +569,6 @@ class CarbonAwareApi {
     }
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -514,20 +593,29 @@ class CarbonAwareApi {
   ///
   /// * [DateTime] toTime:
   ///   [Optional] End time for the data query.
-  Future<List<EmissionsData>?> getEmissionsDataForLocationsByTime(List<String> location, { DateTime? time, DateTime? toTime, }) async {
-    final response = await getEmissionsDataForLocationsByTimeWithHttpInfo(location,  time: time, toTime: toTime, );
+  Future<List<EmissionsData>?> getEmissionsDataForLocationsByTime(
+    List<String> location, {
+    DateTime? time,
+    DateTime? toTime,
+  }) async {
+    final response = await getEmissionsDataForLocationsByTimeWithHttpInfo(
+      location,
+      time: time,
+      toTime: toTime,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
       final responseBody = await _decodeBodyBytes(response);
-      return (await apiClient.deserializeAsync(responseBody, 'List<EmissionsData>') as List)
-        .cast<EmissionsData>()
-        .toList();
-
+      return (await apiClient.deserializeAsync(
+              responseBody, 'List<EmissionsData>') as List)
+          .cast<EmissionsData>()
+          .toList();
     }
     return null;
   }

@@ -46,22 +46,25 @@ class EmissionsDataDTO {
   double? value;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is EmissionsDataDTO &&
-     other.location == location &&
-     other.timestamp == timestamp &&
-     other.duration == duration &&
-     other.value == value;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EmissionsDataDTO &&
+          other.location == location &&
+          other.timestamp == timestamp &&
+          other.duration == duration &&
+          other.value == value;
 
   @override
   int get hashCode =>
-    // ignore: unnecessary_parenthesis
-    (location == null ? 0 : location!.hashCode) +
-    (timestamp == null ? 0 : timestamp!.hashCode) +
-    (duration == null ? 0 : duration!.hashCode) +
-    (value == null ? 0 : value!.hashCode);
+      // ignore: unnecessary_parenthesis
+      (location == null ? 0 : location!.hashCode) +
+      (timestamp == null ? 0 : timestamp!.hashCode) +
+      (duration == null ? 0 : duration!.hashCode) +
+      (value == null ? 0 : value!.hashCode);
 
   @override
-  String toString() => 'EmissionsDataDTO[location=$location, timestamp=$timestamp, duration=$duration, value=$value]';
+  String toString() =>
+      'EmissionsDataDTO[location=$location, timestamp=$timestamp, duration=$duration, value=$value]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -100,8 +103,10 @@ class EmissionsDataDTO {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "EmissionsDataDTO[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "EmissionsDataDTO[$key]" has a null value in JSON.');
+          assert(json.containsKey(key),
+              'Required key "EmissionsDataDTO[$key]" is missing from JSON.');
+          assert(json[key] != null,
+              'Required key "EmissionsDataDTO[$key]" has a null value in JSON.');
         });
         return true;
       }());
@@ -116,7 +121,10 @@ class EmissionsDataDTO {
     return null;
   }
 
-  static List<EmissionsDataDTO>? listFromJson(dynamic json, {bool growable = false,}) {
+  static List<EmissionsDataDTO>? listFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final result = <EmissionsDataDTO>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
@@ -144,12 +152,18 @@ class EmissionsDataDTO {
   }
 
   // maps a json object with a list of EmissionsDataDTO-objects as value to a dart map
-  static Map<String, List<EmissionsDataDTO>> mapListFromJson(dynamic json, {bool growable = false,}) {
+  static Map<String, List<EmissionsDataDTO>> mapListFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final map = <String, List<EmissionsDataDTO>>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = EmissionsDataDTO.listFromJson(entry.value, growable: growable,);
+        final value = EmissionsDataDTO.listFromJson(
+          entry.value,
+          growable: growable,
+        );
         if (value != null) {
           map[entry.key] = value;
         }
@@ -159,7 +173,5 @@ class EmissionsDataDTO {
   }
 
   /// The list of required keys that must be present in a JSON.
-  static const requiredKeys = <String>{
-  };
+  static const requiredKeys = <String>{};
 }
-

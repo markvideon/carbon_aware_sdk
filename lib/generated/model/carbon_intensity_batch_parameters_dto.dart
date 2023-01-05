@@ -28,20 +28,23 @@ class CarbonIntensityBatchParametersDTO {
   DateTime? endTime;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is CarbonIntensityBatchParametersDTO &&
-     other.location == location &&
-     other.startTime == startTime &&
-     other.endTime == endTime;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CarbonIntensityBatchParametersDTO &&
+          other.location == location &&
+          other.startTime == startTime &&
+          other.endTime == endTime;
 
   @override
   int get hashCode =>
-    // ignore: unnecessary_parenthesis
-    (location == null ? 0 : location!.hashCode) +
-    (startTime == null ? 0 : startTime!.hashCode) +
-    (endTime == null ? 0 : endTime!.hashCode);
+      // ignore: unnecessary_parenthesis
+      (location == null ? 0 : location!.hashCode) +
+      (startTime == null ? 0 : startTime!.hashCode) +
+      (endTime == null ? 0 : endTime!.hashCode);
 
   @override
-  String toString() => 'CarbonIntensityBatchParametersDTO[location=$location, startTime=$startTime, endTime=$endTime]';
+  String toString() =>
+      'CarbonIntensityBatchParametersDTO[location=$location, startTime=$startTime, endTime=$endTime]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -75,8 +78,10 @@ class CarbonIntensityBatchParametersDTO {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "CarbonIntensityBatchParametersDTO[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "CarbonIntensityBatchParametersDTO[$key]" has a null value in JSON.');
+          assert(json.containsKey(key),
+              'Required key "CarbonIntensityBatchParametersDTO[$key]" is missing from JSON.');
+          assert(json[key] != null,
+              'Required key "CarbonIntensityBatchParametersDTO[$key]" has a null value in JSON.');
         });
         return true;
       }());
@@ -90,7 +95,10 @@ class CarbonIntensityBatchParametersDTO {
     return null;
   }
 
-  static List<CarbonIntensityBatchParametersDTO>? listFromJson(dynamic json, {bool growable = false,}) {
+  static List<CarbonIntensityBatchParametersDTO>? listFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final result = <CarbonIntensityBatchParametersDTO>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
@@ -103,7 +111,8 @@ class CarbonIntensityBatchParametersDTO {
     return result.toList(growable: growable);
   }
 
-  static Map<String, CarbonIntensityBatchParametersDTO> mapFromJson(dynamic json) {
+  static Map<String, CarbonIntensityBatchParametersDTO> mapFromJson(
+      dynamic json) {
     final map = <String, CarbonIntensityBatchParametersDTO>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
@@ -118,12 +127,18 @@ class CarbonIntensityBatchParametersDTO {
   }
 
   // maps a json object with a list of CarbonIntensityBatchParametersDTO-objects as value to a dart map
-  static Map<String, List<CarbonIntensityBatchParametersDTO>> mapListFromJson(dynamic json, {bool growable = false,}) {
+  static Map<String, List<CarbonIntensityBatchParametersDTO>> mapListFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final map = <String, List<CarbonIntensityBatchParametersDTO>>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = CarbonIntensityBatchParametersDTO.listFromJson(entry.value, growable: growable,);
+        final value = CarbonIntensityBatchParametersDTO.listFromJson(
+          entry.value,
+          growable: growable,
+        );
         if (value != null) {
           map[entry.key] = value;
         }
@@ -133,7 +148,5 @@ class CarbonIntensityBatchParametersDTO {
   }
 
   /// The list of required keys that must be present in a JSON.
-  static const requiredKeys = <String>{
-  };
+  static const requiredKeys = <String>{};
 }
-

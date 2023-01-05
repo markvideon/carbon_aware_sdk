@@ -37,7 +37,6 @@ part 'model/emissions_forecast_batch_parameters_dto.dart';
 part 'model/emissions_forecast_dto.dart';
 part 'model/validation_problem_details.dart';
 
-
 const _delimiters = {'csv': ',', 'ssv': ' ', 'tsv': '\t', 'pipes': '|'};
 const _dateEpochMarker = 'epoch';
 final _dateFormatter = DateFormat('yyyy-MM-dd');

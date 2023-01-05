@@ -78,30 +78,33 @@ class EmissionsForecastDTO {
   List<EmissionsDataDTO>? forecastData;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is EmissionsForecastDTO &&
-     other.generatedAt == generatedAt &&
-     other.requestedAt == requestedAt &&
-     other.location == location &&
-     other.dataStartAt == dataStartAt &&
-     other.dataEndAt == dataEndAt &&
-     other.windowSize == windowSize &&
-     other.optimalDataPoints == optimalDataPoints &&
-     other.forecastData == forecastData;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EmissionsForecastDTO &&
+          other.generatedAt == generatedAt &&
+          other.requestedAt == requestedAt &&
+          other.location == location &&
+          other.dataStartAt == dataStartAt &&
+          other.dataEndAt == dataEndAt &&
+          other.windowSize == windowSize &&
+          other.optimalDataPoints == optimalDataPoints &&
+          other.forecastData == forecastData;
 
   @override
   int get hashCode =>
-    // ignore: unnecessary_parenthesis
-    (generatedAt == null ? 0 : generatedAt!.hashCode) +
-    (requestedAt == null ? 0 : requestedAt!.hashCode) +
-    (location == null ? 0 : location!.hashCode) +
-    (dataStartAt == null ? 0 : dataStartAt!.hashCode) +
-    (dataEndAt == null ? 0 : dataEndAt!.hashCode) +
-    (windowSize == null ? 0 : windowSize!.hashCode) +
-    (optimalDataPoints == null ? 0 : optimalDataPoints!.hashCode) +
-    (forecastData == null ? 0 : forecastData!.hashCode);
+      // ignore: unnecessary_parenthesis
+      (generatedAt == null ? 0 : generatedAt!.hashCode) +
+      (requestedAt == null ? 0 : requestedAt!.hashCode) +
+      (location == null ? 0 : location!.hashCode) +
+      (dataStartAt == null ? 0 : dataStartAt!.hashCode) +
+      (dataEndAt == null ? 0 : dataEndAt!.hashCode) +
+      (windowSize == null ? 0 : windowSize!.hashCode) +
+      (optimalDataPoints == null ? 0 : optimalDataPoints!.hashCode) +
+      (forecastData == null ? 0 : forecastData!.hashCode);
 
   @override
-  String toString() => 'EmissionsForecastDTO[generatedAt=$generatedAt, requestedAt=$requestedAt, location=$location, dataStartAt=$dataStartAt, dataEndAt=$dataEndAt, windowSize=$windowSize, optimalDataPoints=$optimalDataPoints, forecastData=$forecastData]';
+  String toString() =>
+      'EmissionsForecastDTO[generatedAt=$generatedAt, requestedAt=$requestedAt, location=$location, dataStartAt=$dataStartAt, dataEndAt=$dataEndAt, windowSize=$windowSize, optimalDataPoints=$optimalDataPoints, forecastData=$forecastData]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -160,8 +163,10 @@ class EmissionsForecastDTO {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "EmissionsForecastDTO[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "EmissionsForecastDTO[$key]" has a null value in JSON.');
+          assert(json.containsKey(key),
+              'Required key "EmissionsForecastDTO[$key]" is missing from JSON.');
+          assert(json[key] != null,
+              'Required key "EmissionsForecastDTO[$key]" has a null value in JSON.');
         });
         return true;
       }());
@@ -173,14 +178,20 @@ class EmissionsForecastDTO {
         dataStartAt: mapDateTime(json, r'dataStartAt', ''),
         dataEndAt: mapDateTime(json, r'dataEndAt', ''),
         windowSize: mapValueOfType<int>(json, r'windowSize'),
-        optimalDataPoints: EmissionsDataDTO.listFromJson(json[r'optimalDataPoints']) ?? const [],
-        forecastData: EmissionsDataDTO.listFromJson(json[r'forecastData']) ?? const [],
+        optimalDataPoints:
+            EmissionsDataDTO.listFromJson(json[r'optimalDataPoints']) ??
+                const [],
+        forecastData:
+            EmissionsDataDTO.listFromJson(json[r'forecastData']) ?? const [],
       );
     }
     return null;
   }
 
-  static List<EmissionsForecastDTO>? listFromJson(dynamic json, {bool growable = false,}) {
+  static List<EmissionsForecastDTO>? listFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final result = <EmissionsForecastDTO>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
@@ -208,12 +219,18 @@ class EmissionsForecastDTO {
   }
 
   // maps a json object with a list of EmissionsForecastDTO-objects as value to a dart map
-  static Map<String, List<EmissionsForecastDTO>> mapListFromJson(dynamic json, {bool growable = false,}) {
+  static Map<String, List<EmissionsForecastDTO>> mapListFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final map = <String, List<EmissionsForecastDTO>>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = EmissionsForecastDTO.listFromJson(entry.value, growable: growable,);
+        final value = EmissionsForecastDTO.listFromJson(
+          entry.value,
+          growable: growable,
+        );
         if (value != null) {
           map[entry.key] = value;
         }
@@ -223,7 +240,5 @@ class EmissionsForecastDTO {
   }
 
   /// The list of required keys that must be present in a JSON.
-  static const requiredKeys = <String>{
-  };
+  static const requiredKeys = <String>{};
 }
-

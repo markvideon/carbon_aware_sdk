@@ -29,15 +29,13 @@ void main() {
     //Future<List<EmissionsForecastDTO>> batchForecastDataAsync({ List<EmissionsForecastBatchParametersDTO> emissionsForecastBatchParametersDTO }) async
     test('test batchForecastDataAsync', () async {
       final result = await instance.batchForecastDataAsync(
-        emissionsForecastBatchParametersDTO:
-          locations.map((e) => EmissionsForecastBatchParametersDTO(
-            requestedAt: DateTime.now(),
-            location: e,
-            // dataStartAt: now,
-            windowSize: workloadMins
-          )
-        ).toList(growable: false)
-      );
+          emissionsForecastBatchParametersDTO: locations
+              .map((e) => EmissionsForecastBatchParametersDTO(
+                  requestedAt: DateTime.now(),
+                  location: e,
+                  // dataStartAt: now,
+                  windowSize: workloadMins))
+              .toList(growable: false));
 
       expect(result is List<EmissionsForecastDTO> && result.isNotEmpty, true);
     });
@@ -49,10 +47,7 @@ void main() {
     //Future<CarbonIntensityDTO> getAverageCarbonIntensity(String location, DateTime startTime, DateTime endTime) async
     test('test getAverageCarbonIntensity', () async {
       final result = await instance.getAverageCarbonIntensity(
-        locations.first,
-        now.subtract(Duration(days: 1)),
-        now
-      );
+          locations.first, now.subtract(Duration(days: 1)), now);
 
       expect(result is CarbonIntensityDTO, true);
     });
@@ -63,15 +58,13 @@ void main() {
     //
     //Future<List<CarbonIntensityDTO>> getAverageCarbonIntensityBatch({ List<CarbonIntensityBatchParametersDTO> carbonIntensityBatchParametersDTO }) async
     test('test getAverageCarbonIntensityBatch', () async {
-      final result = await instance.getAverageCarbonIntensityBatch(
-        carbonIntensityBatchParametersDTO: [
-          CarbonIntensityBatchParametersDTO(
+      final result = await instance
+          .getAverageCarbonIntensityBatch(carbonIntensityBatchParametersDTO: [
+        CarbonIntensityBatchParametersDTO(
             location: locations.first,
             startTime: DateTime.now(),
-            endTime: DateTime.now()
-          )
-        ]
-      );
+            endTime: DateTime.now())
+      ]);
 
       expect(result is List<CarbonIntensityDTO> && result.isNotEmpty, true);
     });
@@ -80,11 +73,11 @@ void main() {
     //
     //Future<List<EmissionsData>> getBestEmissionsDataForLocationsByTime(List<String> location, { DateTime time, DateTime toTime }) async
     test('test getBestEmissionsDataForLocationsByTime', () async {
-     final result = await instance.getBestEmissionsDataForLocationsByTime(
-         locations,
-     );
+      final result = await instance.getBestEmissionsDataForLocationsByTime(
+        locations,
+      );
 
-     expect(result is List<EmissionsData> && result.isNotEmpty, true);
+      expect(result is List<EmissionsData> && result.isNotEmpty, true);
     });
 
     // Retrieves the most recent forecasted data and calculates the optimal marginal carbon intensity window.
@@ -101,7 +94,8 @@ void main() {
     //
     //Future<List<EmissionsData>> getEmissionsDataForLocationByTime(String location, { DateTime time, DateTime toTime }) async
     test('test getEmissionsDataForLocationByTime', () async {
-      final result = await instance.getEmissionsDataForLocationByTime(locations.first);
+      final result =
+          await instance.getEmissionsDataForLocationByTime(locations.first);
       expect(result is List<EmissionsData> && result.isNotEmpty, true);
     });
 
@@ -109,7 +103,8 @@ void main() {
     //
     //Future<List<EmissionsData>> getEmissionsDataForLocationsByTime(List<String> location, { DateTime time, DateTime toTime }) async
     test('test getEmissionsDataForLocationsByTime', () async {
-      final result = await instance.getEmissionsDataForLocationsByTime(locations);
+      final result =
+          await instance.getEmissionsDataForLocationsByTime(locations);
       expect(result is List<EmissionsData> && result.isNotEmpty, true);
     });
   });

@@ -38,22 +38,25 @@ class CarbonIntensityDTO {
   double? carbonIntensity;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is CarbonIntensityDTO &&
-     other.location == location &&
-     other.startTime == startTime &&
-     other.endTime == endTime &&
-     other.carbonIntensity == carbonIntensity;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CarbonIntensityDTO &&
+          other.location == location &&
+          other.startTime == startTime &&
+          other.endTime == endTime &&
+          other.carbonIntensity == carbonIntensity;
 
   @override
   int get hashCode =>
-    // ignore: unnecessary_parenthesis
-    (location == null ? 0 : location!.hashCode) +
-    (startTime == null ? 0 : startTime!.hashCode) +
-    (endTime == null ? 0 : endTime!.hashCode) +
-    (carbonIntensity == null ? 0 : carbonIntensity!.hashCode);
+      // ignore: unnecessary_parenthesis
+      (location == null ? 0 : location!.hashCode) +
+      (startTime == null ? 0 : startTime!.hashCode) +
+      (endTime == null ? 0 : endTime!.hashCode) +
+      (carbonIntensity == null ? 0 : carbonIntensity!.hashCode);
 
   @override
-  String toString() => 'CarbonIntensityDTO[location=$location, startTime=$startTime, endTime=$endTime, carbonIntensity=$carbonIntensity]';
+  String toString() =>
+      'CarbonIntensityDTO[location=$location, startTime=$startTime, endTime=$endTime, carbonIntensity=$carbonIntensity]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -92,8 +95,10 @@ class CarbonIntensityDTO {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "CarbonIntensityDTO[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "CarbonIntensityDTO[$key]" has a null value in JSON.');
+          assert(json.containsKey(key),
+              'Required key "CarbonIntensityDTO[$key]" is missing from JSON.');
+          assert(json[key] != null,
+              'Required key "CarbonIntensityDTO[$key]" has a null value in JSON.');
         });
         return true;
       }());
@@ -108,7 +113,10 @@ class CarbonIntensityDTO {
     return null;
   }
 
-  static List<CarbonIntensityDTO>? listFromJson(dynamic json, {bool growable = false,}) {
+  static List<CarbonIntensityDTO>? listFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final result = <CarbonIntensityDTO>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
@@ -136,12 +144,18 @@ class CarbonIntensityDTO {
   }
 
   // maps a json object with a list of CarbonIntensityDTO-objects as value to a dart map
-  static Map<String, List<CarbonIntensityDTO>> mapListFromJson(dynamic json, {bool growable = false,}) {
+  static Map<String, List<CarbonIntensityDTO>> mapListFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final map = <String, List<CarbonIntensityDTO>>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = CarbonIntensityDTO.listFromJson(entry.value, growable: growable,);
+        final value = CarbonIntensityDTO.listFromJson(
+          entry.value,
+          growable: growable,
+        );
         if (value != null) {
           map[entry.key] = value;
         }
@@ -151,7 +165,5 @@ class CarbonIntensityDTO {
   }
 
   /// The list of required keys that must be present in a JSON.
-  static const requiredKeys = <String>{
-  };
+  static const requiredKeys = <String>{};
 }
-

@@ -36,24 +36,27 @@ class EmissionsForecastBatchParametersDTO {
   int? windowSize;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is EmissionsForecastBatchParametersDTO &&
-     other.requestedAt == requestedAt &&
-     other.location == location &&
-     other.dataStartAt == dataStartAt &&
-     other.dataEndAt == dataEndAt &&
-     other.windowSize == windowSize;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EmissionsForecastBatchParametersDTO &&
+          other.requestedAt == requestedAt &&
+          other.location == location &&
+          other.dataStartAt == dataStartAt &&
+          other.dataEndAt == dataEndAt &&
+          other.windowSize == windowSize;
 
   @override
   int get hashCode =>
-    // ignore: unnecessary_parenthesis
-    (requestedAt == null ? 0 : requestedAt!.hashCode) +
-    (location == null ? 0 : location!.hashCode) +
-    (dataStartAt == null ? 0 : dataStartAt!.hashCode) +
-    (dataEndAt == null ? 0 : dataEndAt!.hashCode) +
-    (windowSize == null ? 0 : windowSize!.hashCode);
+      // ignore: unnecessary_parenthesis
+      (requestedAt == null ? 0 : requestedAt!.hashCode) +
+      (location == null ? 0 : location!.hashCode) +
+      (dataStartAt == null ? 0 : dataStartAt!.hashCode) +
+      (dataEndAt == null ? 0 : dataEndAt!.hashCode) +
+      (windowSize == null ? 0 : windowSize!.hashCode);
 
   @override
-  String toString() => 'EmissionsForecastBatchParametersDTO[requestedAt=$requestedAt, location=$location, dataStartAt=$dataStartAt, dataEndAt=$dataEndAt, windowSize=$windowSize]';
+  String toString() =>
+      'EmissionsForecastBatchParametersDTO[requestedAt=$requestedAt, location=$location, dataStartAt=$dataStartAt, dataEndAt=$dataEndAt, windowSize=$windowSize]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -97,8 +100,10 @@ class EmissionsForecastBatchParametersDTO {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "EmissionsForecastBatchParametersDTO[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "EmissionsForecastBatchParametersDTO[$key]" has a null value in JSON.');
+          assert(json.containsKey(key),
+              'Required key "EmissionsForecastBatchParametersDTO[$key]" is missing from JSON.');
+          assert(json[key] != null,
+              'Required key "EmissionsForecastBatchParametersDTO[$key]" has a null value in JSON.');
         });
         return true;
       }());
@@ -114,7 +119,10 @@ class EmissionsForecastBatchParametersDTO {
     return null;
   }
 
-  static List<EmissionsForecastBatchParametersDTO>? listFromJson(dynamic json, {bool growable = false,}) {
+  static List<EmissionsForecastBatchParametersDTO>? listFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final result = <EmissionsForecastBatchParametersDTO>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
@@ -127,7 +135,8 @@ class EmissionsForecastBatchParametersDTO {
     return result.toList(growable: growable);
   }
 
-  static Map<String, EmissionsForecastBatchParametersDTO> mapFromJson(dynamic json) {
+  static Map<String, EmissionsForecastBatchParametersDTO> mapFromJson(
+      dynamic json) {
     final map = <String, EmissionsForecastBatchParametersDTO>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
@@ -142,12 +151,18 @@ class EmissionsForecastBatchParametersDTO {
   }
 
   // maps a json object with a list of EmissionsForecastBatchParametersDTO-objects as value to a dart map
-  static Map<String, List<EmissionsForecastBatchParametersDTO>> mapListFromJson(dynamic json, {bool growable = false,}) {
+  static Map<String, List<EmissionsForecastBatchParametersDTO>> mapListFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final map = <String, List<EmissionsForecastBatchParametersDTO>>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = EmissionsForecastBatchParametersDTO.listFromJson(entry.value, growable: growable,);
+        final value = EmissionsForecastBatchParametersDTO.listFromJson(
+          entry.value,
+          growable: growable,
+        );
         if (value != null) {
           map[entry.key] = value;
         }
@@ -157,7 +172,5 @@ class EmissionsForecastBatchParametersDTO {
   }
 
   /// The list of required keys that must be present in a JSON.
-  static const requiredKeys = <String>{
-  };
+  static const requiredKeys = <String>{};
 }
-

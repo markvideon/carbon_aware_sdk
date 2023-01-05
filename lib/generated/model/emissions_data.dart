@@ -46,22 +46,25 @@ class EmissionsData {
   String? duration;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is EmissionsData &&
-     other.location == location &&
-     other.time == time &&
-     other.rating == rating &&
-     other.duration == duration;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EmissionsData &&
+          other.location == location &&
+          other.time == time &&
+          other.rating == rating &&
+          other.duration == duration;
 
   @override
   int get hashCode =>
-    // ignore: unnecessary_parenthesis
-    (location == null ? 0 : location!.hashCode) +
-    (time == null ? 0 : time!.hashCode) +
-    (rating == null ? 0 : rating!.hashCode) +
-    (duration == null ? 0 : duration!.hashCode);
+      // ignore: unnecessary_parenthesis
+      (location == null ? 0 : location!.hashCode) +
+      (time == null ? 0 : time!.hashCode) +
+      (rating == null ? 0 : rating!.hashCode) +
+      (duration == null ? 0 : duration!.hashCode);
 
   @override
-  String toString() => 'EmissionsData[location=$location, time=$time, rating=$rating, duration=$duration]';
+  String toString() =>
+      'EmissionsData[location=$location, time=$time, rating=$rating, duration=$duration]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -100,8 +103,10 @@ class EmissionsData {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "EmissionsData[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "EmissionsData[$key]" has a null value in JSON.');
+          assert(json.containsKey(key),
+              'Required key "EmissionsData[$key]" is missing from JSON.');
+          assert(json[key] != null,
+              'Required key "EmissionsData[$key]" has a null value in JSON.');
         });
         return true;
       }());
@@ -116,7 +121,10 @@ class EmissionsData {
     return null;
   }
 
-  static List<EmissionsData>? listFromJson(dynamic json, {bool growable = false,}) {
+  static List<EmissionsData>? listFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final result = <EmissionsData>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
@@ -144,12 +152,18 @@ class EmissionsData {
   }
 
   // maps a json object with a list of EmissionsData-objects as value to a dart map
-  static Map<String, List<EmissionsData>> mapListFromJson(dynamic json, {bool growable = false,}) {
+  static Map<String, List<EmissionsData>> mapListFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final map = <String, List<EmissionsData>>{};
     if (json is Map && json.isNotEmpty) {
       json = json.cast<String, dynamic>(); // ignore: parameter_assignments
       for (final entry in json.entries) {
-        final value = EmissionsData.listFromJson(entry.value, growable: growable,);
+        final value = EmissionsData.listFromJson(
+          entry.value,
+          growable: growable,
+        );
         if (value != null) {
           map[entry.key] = value;
         }
@@ -159,7 +173,5 @@ class EmissionsData {
   }
 
   /// The list of required keys that must be present in a JSON.
-  static const requiredKeys = <String>{
-  };
+  static const requiredKeys = <String>{};
 }
-
